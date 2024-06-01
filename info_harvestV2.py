@@ -55,13 +55,10 @@ def remove_newlines(data):
 
 # Function to save scraped content to a file 
 def save_to_json(data, filename='data/bofip_data.json'):
-    # Check if the file exists
     if not os.path.exists(filename):
-        # Create an empty JSON structure if the file doesn't exist
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump({"bofip": {}}, f, indent=4, ensure_ascii=False)
 
-    # Try to read the existing data from the JSON file
     try:
         with open(filename, 'r', encoding='utf-8') as f:
             json_data = json.load(f)
@@ -81,7 +78,7 @@ def run():
         links = f.readlines()
 
     article_id = 1  # Initialize article ID counter
-    print("AMERICA YA :]")
+    print("AMERICA YA :D")
 
     for link in links:
         link = link.strip()
