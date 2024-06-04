@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests, time, re, json, os
-"""
+
 
 bofip = {}
 
@@ -52,11 +52,12 @@ def remove_newlines(data):
     elif isinstance(data, dict):
         return {key: remove_newlines(value) for key, value in data.items()}
     return data
-"""
+
+
 # Function to save scraped content to a file 
 def save_to_json(data, filename='data/bofip_data.json'):
     if not os.path.exists(filename):
-        with open(filename, 'w', encoding='utf-8') as f:
+        with open(filename, 'w+', encoding='utf-8') as f:
             json.dump({"bofip": {}}, f, indent=4, ensure_ascii=False)
 
     try:
@@ -70,15 +71,15 @@ def save_to_json(data, filename='data/bofip_data.json'):
     json_data['bofip'].update(data)
 
     # Save the updated data back to the JSON file
-    with open(filename, 'w', encoding='utf-8') as f:
+    with open(filename, 'w+', encoding='utf-8') as f:
         json.dump(json_data, f, indent=4, ensure_ascii=False)
-"""
+
+
 def run():
     with open("data/links_bofip.txt", "r", encoding="utf-8") as f:
         links = f.readlines()
 
     article_id = 1  # Initialize article ID counter
-    print("AMERICA YA :D")
 
     for link in links:
         link = link.strip()
@@ -89,10 +90,7 @@ def run():
         save_to_json({article_id_str: article_data})  # Save scraped content
         
         article_id += 1  # Increment article ID
-        print("HALO :D")
 
-        time.sleep(0.5)  # Delay
     print("process : completed")
 
 run()
-"""

@@ -1,21 +1,35 @@
 import requests
 from bs4 import BeautifulSoup
+import os
 
+def scrap_news():
+    all_links = []
+    print("processing links in pages")
+    for page in range(119):
+        url = f"https://bofip.impots.gouv.fr/actualites/toutes-les-actualites/all?page={page}"
+        response = requests.get(url)
+        
+        # Parse the HTML content
+        soup = BeautifulSoup(response.content, 'html.parser')
+        
+        # Find all <a> tags with "ACTU" in href attribute
+        actu_links = soup.find_all('a', href=lambda href: href and 'ACTU' in href)
+        all_links.extend(actu_links)
+    return all_links
 
-for page in range(117):
-    url = "https://bofip.impots.gouv.fr/actualites/toutes-les-actualites/all?page="
-    url += str(page)
-
-    response = requests.get(url)
-
-    # Parse the HTML content
-    soup = BeautifulSoup(response.content, 'html.parser')
-
-    # Find all <a> tags with "TVA" in the title attribute and "ACTU" in href attribute
-    actu_links = soup.find_all('a', href=lambda href: href and 'ACTU' in href)
-
+def save_to_links(actu_links, filename="data/links_bofip.txt"):
+    # Ensure the directory exists
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+    
     # Extract and print the href attribute of each <a> tag
-    with open("data/links_bofip1.txt", "a") as f:
+    with open(filename, "w+") as f:
         for link in actu_links:
             f.write("https://bofip.impots.gouv.fr" + link.get('href') + "\n")
 
+def run_actu_links_scraping():
+    data = scrap_news()
+    save_to_links(data)
+    print("All news links scraping: completed")
+
+# Call the run function
+run_actu_links_scraping()
