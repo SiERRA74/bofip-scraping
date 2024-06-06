@@ -1,5 +1,8 @@
+import json
+import os
+import requests
 from bs4 import BeautifulSoup
-import requests, re, os
+import re
 
 # Function to perform HTML request
 def html_request(link):
@@ -17,7 +20,11 @@ def scrape_link_content(article_id, soup, link):
     
     # Find the division/serie
     division_serie_element = soup.find('p', string=re.compile(r"Série / Division", re.IGNORECASE))
-    division_serie = division_serie_element.find_next_sibling('p').text.strip() if division_serie_element else "Division/Serie Not Found"
+    if division_serie_element:
+        next_sibling = division_serie_element.find_next_sibling('p')
+        division_serie = next_sibling.text.strip() if next_sibling else "Division/Serie Not Found"
+    else:
+        division_serie = "Division/Serie Not Found"
     
     # Find the text and collect links
     text_elements = []
@@ -53,13 +60,13 @@ def save_to_file(article_id, title, division_serie, text, link, legifrance, file
             f.write("")
 
     with open(filename, 'a', encoding='utf-8') as f:
-        f.write(f"Article ID: {article_id}\n")
-        f.write(f"Title: {title}\n")
-        f.write(f"Division/Serie: {division_serie}\n")
-        f.write(f"Text: {text}\n")
-        f.write(f"Link: {link}\n")
-        f.write(f"Legifrance Links: {', '.join(legifrance)}\n")
-        f.write("\n\n")  # Two line breaks for separation
+        f.write(f"-id {article_id}\n")
+        f.write(f"- {title}\n")
+        f.write(f"- {division_serie}\n")
+        f.write(f"- {text}\n")
+        f.write(f"- {link}\n")
+        f.write(f"- {'\n '.join(legifrance)}\n")
+        f.write("\n\n")
 
 # Main function to run the script
 def run_info_harvest():
