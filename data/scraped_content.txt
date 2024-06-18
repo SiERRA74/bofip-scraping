@@ -1258,3 +1258,15 @@ Division/Serie: BIC - CHAMP
 Text: L'article 19 de la loi n° 2018-1317 du 28 décembre 2018 de finances pour 2019 a rénové les dispositifs fiscaux applicables dans les départements d'outre-mer (DOM) en établissant un dispositif unique et simplifié : les zones franches d'activité nouvelle génération (ZFANG) définies à l'article 44 quaterdecies du code général des impôts (CGI).
 Article Link: https://bofip.impots.gouv.fr/bofip/13712-PGP.html/ACTU-2022-00134
 
+id_article: 1
+titre: 25/04/2024 : RSA - Prorogation d'une année des aménagements des modalités de prise en charge par l'employeur des frais engagés par ses salariés pour leurs déplacements entre leur résidence habituelle et leur lieu de travail prévus par la loi n° 2022-1157 du 16 août 2022 de finances rectificative pour 2022 et augmentation pérenne des limites d'exonération (loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, art. 7 et art. 29)
+division RSA - CHAMP
+text: L'article 7 de la loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024 et l'article 29 de la loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024 prorogent d'une année supplémentaire les aménagements des modalités de prise en charge par l'employeur des frais engagés pour ses salariés pour leurs déplacements entre leur résidence habituelle et leur lieu de travail prévus par l'article 2 de la loi n° 2022-1157 du 16 août 2022 modifiée de finances rectificative pour 2022 et l'article 3 de la loi n° 2022-1157 du 16 août 2022 modifiée de finances rectificative pour 2022. Ils augmentent en outre de façon pérenne les limites d'exonération à compter de l'imposition des revenus de l'année 2025.
+linked_article https://bofip.impots.gouv.fr/bofip/14162-PGP.html/ACTU-2024-00052
+
+id_article: 2
+titre: 24/04/2024 : BNC - Régime fiscal applicable aux associés de sociétés d'exercice libéral - Rescrit
+division RES - BNC
+text: Le BOI-RES-BNC-000136 est complété de nouvelles précisions sur le régime fiscal applicable aux associés de sociétés d'exercice libéral.
+linked_article https://bofip.impots.gouv.fr/bofip/14270-PGP.html/ACTU-2024-00121
+
