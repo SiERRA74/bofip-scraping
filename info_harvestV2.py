@@ -20,28 +20,39 @@ def scrape_link_content(article_id, soup, link):
     
     # Find the division/serie
     division_serie_element = soup.find('p', string=re.compile(r"Série / Division", re.IGNORECASE))
-    division_serie = division_serie_element.find_next_sibling('p').text.strip() if division_serie_element else "Division/Serie Not Found"
+    if division_serie_element:
+        next_p_element = division_serie_element.find_next_sibling('p')
+        division_serie = next_p_element.text.strip() if next_p_element else "Division/Serie Not Found"
+    else:
+        division_serie = "Division/Serie Not Found"
     
     # Find the text and collect links
     text_elements = []
     legifrance = []
-    for p in soup.find_all('p'):
-        if 'Actualité liée' in p.get_text():
-            break
-        text_elements.append(p.get_text().strip())
+
+    # Iterate through all <p> tags and <blockquote> tags
+    for container in soup.find_all(['p', 'blockquote']):
+        if container.name == 'blockquote':
+            paragraphs = container.find_all('p')
+        else:
+            paragraphs = [container]
         
-        # Find all links in the paragraph
-        for a in p.find_all('a', href=True):
-            if a['href'].startswith("https://www.legifrance.gouv.fr/"):
-                legifrance.append(a['href'])
-    
+        for p in paragraphs:
+            if 'Actualité liée' in p.get_text():
+                break
+            text_elements.append(p.get_text().strip())
+            
+            # Find all links in the paragraph
+            for a in p.find_all('a', href=True):
+                if a['href'].startswith("https://www.legifrance.gouv.fr/"):
+                    legifrance.append(a['href'])
+
     text = ' '.join(text_elements)
     
     # Extract the link of the article itself
     article_link = link
     
     return article_id, {'title': title, 'division_serie': division_serie, 'text': text, 'link': article_link, 'legifrance': legifrance}
-
 
 
 def remove_newlines(data):
@@ -55,7 +66,7 @@ def remove_newlines(data):
 
 
 # Function to save scraped content to a file 
-def save_to_json(data, filename='data/bofip_data.json'):
+def save_to_json(data, filename='C:/Users/aksie/Desktop/bofip/bofip-scraping/data/bofip_data.json'):
     if not os.path.exists(filename):
         with open(filename, 'w+', encoding='utf-8') as f:
             json.dump({"bofip": {}}, f, indent=4, ensure_ascii=False)
@@ -74,9 +85,8 @@ def save_to_json(data, filename='data/bofip_data.json'):
     with open(filename, 'w+', encoding='utf-8') as f:
         json.dump(json_data, f, indent=4, ensure_ascii=False)
 
-
 def run():
-    with open("data/links_bofip.txt", "r", encoding="utf-8") as f:
+    with open("C:/Users/aksie/Desktop/bofip/bofip-scraping/data/links_bofip.txt", "r", encoding="utf-8") as f:
         links = f.readlines()
 
     article_id = 1  # Initialize article ID counter

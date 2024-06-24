@@ -39,3 +39,4 @@ output_file = "data/BOI_data.txt"
 # Run scraping and writing process
 scrape_and_write_data(links_file, output_file)
 
+"""This code reads BOI URLs from a plan_classement.txt, scrapes text content from each URL, and writes the scraped data to an output file : BOI_data.txt."""

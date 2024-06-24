@@ -1,5 +1,15 @@
 import re
 
+
+"""
+!!!IMPORTANT :
+Serves to take all the available pages from https://bofip.impots.gouv.fr/plan-de-classement
+(after clicking "Tout déplier")
+You have to inspect that page, and to make sure to copy the right div : <div class="bofip_pdc treeview" style="height: auto;">
+And paste that HTML snippet to a file you have to name plan_classement.txt
+"""
+
+
 def extract_hrefs_from_file(filename):
     hrefs = []
     with open(filename, 'r', encoding='utf-8') as file:
@@ -23,10 +33,3 @@ def run_boi_scrap():
 
 run_boi_scrap()
 
-
-"""
-Serves to take all the available pages from https://bofip.impots.gouv.fr/plan-de-classement
-You have to inspect that page, and to make sure to copy the right div : <div class="bofip_pdc treeview" style="height: auto;">
-(after clicking "Tout déplier") 
-And paste that HTML snippet to a file you have to name plan_classement.txt
-"""
