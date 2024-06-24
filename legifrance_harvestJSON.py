@@ -2,8 +2,6 @@ import json, os, requests, time
 from bs4 import BeautifulSoup as soup
 from info_harvestV2 import save_to_json
 
-print("Starting the correct script.")
-
 # Function to read the JSON file and return its content
 def read_json(filename='data/bofip_data.json'):
     print("Reading JSON")
