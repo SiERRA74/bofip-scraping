@@ -1,21 +1,24 @@
-import sys
-import time
-import requests
 import re
-import json
 import os
+import json
 from bs4 import BeautifulSoup
+import requests
 
-def html_request(link):
-    response = requests.get(link)
-    if response.status_code == 200:
-        soup = BeautifulSoup(response.content, 'html.parser')
-        return soup
-    else:
-        print(f"Failed to fetch {link}. Status code: {response.status_code}")
-        return None
+# Function to process each legifrance link
+def process_links(legifrance_links):
+    processed_links = []
+    for link in legifrance_links:
+        page_soup = html_request(link)
+        article_name = extract_content(page_soup)
+        #article_name, article_content = extract_content(page_soup)
+        #"article_content": article_content,
+        processed_links.append({
+            "article_name": article_name,
+            "article_link": link
+        })
+    return processed_links
 
-
+# Function to extract content from legifrance pages
 def extract_content(page_soup):
     # Extract the article name
     article_name_element = page_soup.find(['p', 'h2'], class_='name-article')
@@ -34,11 +37,25 @@ def extract_content(page_soup):
         # Filter out irrelevant paragraphs
         content_text = ' '.join(p.text.strip() for p in content_paragraphs if p.get('id') != 'label-recherche')
     else:
-        content_text = ""
+        # Try to find content within other potential divs if the first search fails
+        content_div_alternate = page_soup.find('div', class_='content')
+        if content_div_alternate:
+            content_paragraphs = content_div_alternate.find_all('p')
+            content_text = ' '.join(p.text.strip() for p in content_paragraphs if p.get('id') != 'label-recherche')
+        else:
+            content_text = ""
 
-    return article_name, content_text
+    #return article_name, content_text
+    return article_name
 
+# Function to make HTML requests
+def html_request(link):
+    response = requests.get(link)
+    # Parse the HTML content with explicit UTF-8 encoding
+    soup = BeautifulSoup(response.content, 'html.parser', from_encoding='utf-8')
+    return soup
 
+# Function to scrape content from each link
 def scrape_link_content(article_id, soup, link):
     article_id = f"article-{article_id}"
     # Extract the desired information
@@ -56,6 +73,7 @@ def scrape_link_content(article_id, soup, link):
     # Find the text and collect links
     text_elements = []
     legifrance = []
+    boi_files = []
 
     # Iterate through all <p> tags and <blockquote> tags
     for container in soup.find_all(['p', 'blockquote']):
@@ -73,6 +91,17 @@ def scrape_link_content(article_id, soup, link):
             for a in p.find_all('a', href=True):
                 if a['href'].startswith("https://www.legifrance.gouv.fr/"):
                     legifrance.append(a['href'])
+    
+    # Find BOI files in "Documents liés :"
+    boi_section = soup.find('div', class_='document-lies')
+    if boi_section:
+        boi_items = boi_section.find_all('p', class_='paragraphe-rescrit-actu-western')
+        for item in boi_items:
+            link_element = item.find('a', href=True)
+            if link_element:
+                boi_code = link_element.text.strip()
+                boi_desc = item.get_text().replace(boi_code, '').strip(' :')
+                boi_files.append({'code': boi_code, 'description': boi_desc})
 
     text = ' '.join(text_elements)
     
@@ -82,21 +111,14 @@ def scrape_link_content(article_id, soup, link):
     # Process Legifrance links
     processed_legifrance_links = process_links(legifrance)
     
-    return article_id, {'title': title, 'division_serie': division_serie, 'text': text, 'link': article_link, 'legifrance': processed_legifrance_links}
-
-
-def process_links(legifrance_links):
-    processed_links = []
-    for link in legifrance_links:
-        page_soup = html_request(link)
-        if page_soup:
-            article_name, article_content = extract_content(page_soup)
-            processed_links.append({
-                "article_name": article_name,
-                "article_content": article_content
-            })
-    return processed_links
-
+    return article_id, {
+        'title': title, 
+        'division_serie': division_serie, 
+        'text': text, 
+        'link': article_link, 
+        'legifrance': processed_legifrance_links,
+        'boi_files': boi_files
+    }
 
 def remove_newlines(data):
     if isinstance(data, str):
@@ -106,7 +128,6 @@ def remove_newlines(data):
     elif isinstance(data, dict):
         return {key: remove_newlines(value) for key, value in data.items()}
     return data
-
 
 # Function to save scraped content to a file 
 def save_to_json(data, filename='C:/Users/aksie/Desktop/bofip/bofip-scraping/data/bofip_data2.json'):
@@ -128,7 +149,6 @@ def save_to_json(data, filename='C:/Users/aksie/Desktop/bofip/bofip-scraping/dat
     with open(filename, 'w+', encoding='utf-8') as f:
         json.dump(json_data, f, indent=4, ensure_ascii=False)
 
-
 def run():
     with open("C:/Users/aksie/Desktop/bofip/bofip-scraping/data/links_bofip.txt", "r", encoding="utf-8") as f:
         links = f.readlines()
@@ -138,12 +158,13 @@ def run():
     for link in links:
         link = link.strip()
         html = html_request(link)
-        if html:
-            article_id_str, article_data = scrape_link_content(article_id, html, link)
-            article_data = remove_newlines(article_data)
-            save_to_json({article_id_str: article_data})  # Save scraped content
-            article_id += 1  # Increment article ID
+        article_id_str, article_data = scrape_link_content(article_id, html, link)
+        article_data = remove_newlines(article_data)
+        
+        save_to_json({article_id_str: article_data})  # Save scraped content
+        
+        article_id += 1  # Increment article ID 
 
-    print("process : completed")
+    print("Process completed")
 
 run()
