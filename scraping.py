@@ -5,7 +5,7 @@ import os
 def scrap_news():
     all_links = []
     print("processing links in pages")
-    for page in range(119):
+    for page in range(122):
         url = f"https://bofip.impots.gouv.fr/actualites/toutes-les-actualites/all?page={page}"
         response = requests.get(url)
         
@@ -17,9 +17,10 @@ def scrap_news():
         all_links.extend(actu_links)
     return all_links
 
-def save_to_links(actu_links, filename="data/links_bofip.txt"):
+def save_to_links(actu_links, filename="../bofip-scraping/data/actu_links.txt"):
     # Ensure the directory exists
     os.makedirs(os.path.dirname(filename), exist_ok=True)
+
     
     # Extract and print the href attribute of each <a> tag
     with open(filename, "w+") as f:
