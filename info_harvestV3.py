@@ -54,7 +54,7 @@ def remove_newlines(data):
     return data
 
 # Function to save scraped content to a text file
-def save_to_file(article_id, title, division_serie, text, link, legifrance, filename='data/bofip_data.txt'):
+def save_to_file(article_id, title, division_serie, text, link, legifrance, filename='../bofip-scraping/data/bofip_data.txt'):
     if not os.path.exists(filename):
         with open(filename, 'w', encoding='utf-8') as f:
             f.write("")
@@ -70,7 +70,7 @@ def save_to_file(article_id, title, division_serie, text, link, legifrance, file
 
 # Main function to run the script
 def run_info_harvest():
-    with open("data/links_bofip.txt", "r", encoding="utf-8") as f:
+    with open("../bofip-scraping/data/actu_links.txt", "r", encoding="utf-8") as f:
         links = f.readlines()
 
     article_id = 1  # Initialize article ID counter

@@ -4,14 +4,16 @@ import json
 from bs4 import BeautifulSoup
 import requests
 
+# Global variables to keep track of the counter and limit
+counter = 0
+limit = 1500  # Update the limit to 1500
+
 # Function to process each legifrance link
 def process_links(legifrance_links):
     processed_links = []
     for link in legifrance_links:
         page_soup = html_request(link)
-        article_name = extract_content(page_soup)
-        #article_name, article_content = extract_content(page_soup)
-        #"article_content": article_content,
+        article_name = extract_content_legifrance(page_soup)
         processed_links.append({
             "article_name": article_name,
             "article_link": link
@@ -19,7 +21,7 @@ def process_links(legifrance_links):
     return processed_links
 
 # Function to extract content from legifrance pages
-def extract_content(page_soup):
+def extract_content_legifrance(page_soup):
     # Extract the article name
     article_name_element = page_soup.find(['p', 'h2'], class_='name-article')
     if article_name_element:
@@ -31,7 +33,6 @@ def extract_content(page_soup):
 
     # Extract the content
     content_div = page_soup.find('div', attrs={'data-a': 'false'})
-
     if content_div:
         content_paragraphs = content_div.find_all('p')
         # Filter out irrelevant paragraphs
@@ -44,8 +45,6 @@ def extract_content(page_soup):
             content_text = ' '.join(p.text.strip() for p in content_paragraphs if p.get('id') != 'label-recherche')
         else:
             content_text = ""
-
-    #return article_name, content_text
     return article_name
 
 # Function to make HTML requests
@@ -92,16 +91,20 @@ def scrape_link_content(article_id, soup, link):
                 if a['href'].startswith("https://www.legifrance.gouv.fr/"):
                     legifrance.append(a['href'])
     
-    # Find BOI files in "Documents liés :"
-    boi_section = soup.find('div', class_='document-lies')
-    if boi_section:
-        boi_items = boi_section.find_all('p', class_='paragraphe-rescrit-actu-western')
-        for item in boi_items:
-            link_element = item.find('a', href=True)
-            if link_element:
-                boi_code = link_element.text.strip()
-                boi_desc = item.get_text().replace(boi_code, '').strip(' :')
-                boi_files.append({'code': boi_code, 'description': boi_desc})
+
+# Updated section to find BOI files in "Documents liés :"
+    boi_sections = soup.find_all('div', class_='document-lies') + soup.find_all('div', id='document-lies') + soup.find_all('div', class_='content field--name-body')
+
+    for boi_section in boi_sections:
+        if boi_section:
+            boi_items = boi_section.find_all('p', class_=['paragraphe-western', 'paragraphe-rescrit-actu-western'])
+            for item in boi_items:
+                link_element = item.find('a', href=True)
+                if link_element:
+                    boi_code = link_element.text.strip()
+                    boi_desc = item.get_text().replace(boi_code, '').strip(' :')
+                    if boi_code and boi_desc:
+                        boi_files.append({'code': boi_code, 'description': boi_desc})
 
     text = ' '.join(text_elements)
     
@@ -130,13 +133,20 @@ def remove_newlines(data):
     return data
 
 # Function to save scraped content to a file 
-def save_to_json(data, filename='C:/Users/aksie/Desktop/bofip/bofip-scraping/data/bofip_data2.json'):
-    if not os.path.exists(filename):
-        with open(filename, 'w+', encoding='utf-8') as f:
+def save_to_json(data, filepath='../bofip-scraping/data/', base_filename='bofip_data'):
+    global counter, limit
+    current_partition = (counter // limit) * limit
+    next_partition = current_partition + limit
+    filename = f'{base_filename}_{current_partition}_{next_partition}.json'
+
+    full_path = os.path.join(filepath, filename)
+
+    if not os.path.exists(full_path):
+        with open(full_path, 'w+', encoding='utf-8') as f:
             json.dump({"bofip": {}}, f, indent=4, ensure_ascii=False)
 
     try:
-        with open(filename, 'r', encoding='utf-8') as f:
+        with open(full_path, 'r', encoding='utf-8') as f:
             json_data = json.load(f)
     except json.JSONDecodeError:
         # Handle the case where the file is empty or contains invalid JSON
@@ -146,11 +156,12 @@ def save_to_json(data, filename='C:/Users/aksie/Desktop/bofip/bofip-scraping/dat
     json_data['bofip'].update(data)
 
     # Save the updated data back to the JSON file
-    with open(filename, 'w+', encoding='utf-8') as f:
+    with open(full_path, 'w+', encoding='utf-8') as f:
         json.dump(json_data, f, indent=4, ensure_ascii=False)
 
 def run():
-    with open("C:/Users/aksie/Desktop/bofip/bofip-scraping/data/links_bofip.txt", "r", encoding="utf-8") as f:
+    global counter
+    with open("data/actu_links.txt", "r", encoding="utf-8") as f:
         links = f.readlines()
 
     article_id = 1  # Initialize article ID counter
@@ -164,6 +175,7 @@ def run():
         save_to_json({article_id_str: article_data})  # Save scraped content
         
         article_id += 1  # Increment article ID 
+        counter += 1
 
     print("Process completed")
 

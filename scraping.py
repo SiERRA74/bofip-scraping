@@ -34,3 +34,5 @@ def run_actu_links_scraping():
 
 # Call the run function
 run_actu_links_scraping()
+
+#Code made with Abdoul :D
