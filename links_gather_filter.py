@@ -1,6 +1,9 @@
 import json
 import os
 
+"""
+Script pour prendre tous les liens legifrance d'un fichier
+"""
 
 # Function to read the JSON file and return its content
 def read_json(filename='data/bofip_data.json'):

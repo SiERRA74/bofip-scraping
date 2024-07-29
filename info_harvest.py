@@ -38,7 +38,7 @@ def save_to_file(article_id, title, division_serie, text, article_link):
 
 
 
-with open("data/links_bofip.txt", "r", encoding="utf-8") as f:
+with open("../bofip-scraping/data/actu_links.txt", "r", encoding="utf-8") as f:
     links = f.readlines()
 
 article_id = 1  # Initialize article ID counter

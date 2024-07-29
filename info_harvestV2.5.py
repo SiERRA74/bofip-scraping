@@ -6,7 +6,7 @@ import requests
 
 # Global variables to keep track of the counter and limit
 counter = 0
-limit = 1500  # Update the limit to 1500
+limit = 1000  # Update the limit to 1000
 
 # Function to process each legifrance link
 def process_links(legifrance_links):

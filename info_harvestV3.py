@@ -54,7 +54,7 @@ def remove_newlines(data):
     return data
 
 # Function to save scraped content to a text file
-def save_to_file(article_id, title, division_serie, text, link, legifrance, filename='../bofip-scraping/data/bofip_data.txt'):
+def save_to_file(article_id, title, division_serie, text, link, legifrance, filename='../bofip-scraping/data/bofip_dataV3.txt'):
     if not os.path.exists(filename):
         with open(filename, 'w', encoding='utf-8') as f:
             f.write("")

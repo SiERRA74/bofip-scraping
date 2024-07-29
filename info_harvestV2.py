@@ -66,7 +66,7 @@ def remove_newlines(data):
 
 
 # Function to save scraped content to a file 
-def save_to_json(data, filename='C:/Users/aksie/Desktop/bofip/bofip-scraping/data/bofip_data.json'):
+def save_to_json(data, filename='../bofip-scraping/data/bofip_data.json'):
     if not os.path.exists(filename):
         with open(filename, 'w+', encoding='utf-8') as f:
             json.dump({"bofip": {}}, f, indent=4, ensure_ascii=False)
@@ -86,7 +86,7 @@ def save_to_json(data, filename='C:/Users/aksie/Desktop/bofip/bofip-scraping/dat
         json.dump(json_data, f, indent=4, ensure_ascii=False)
 
 def run():
-    with open("C:/Users/aksie/Desktop/bofip/bofip-scraping/data/links_bofip.txt", "r", encoding="utf-8") as f:
+    with open("../bofip-scraping/data/actu_links.txt", "r", encoding="utf-8") as f:
         links = f.readlines()
 
     article_id = 1  # Initialize article ID counter
