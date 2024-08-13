@@ -3,6 +3,8 @@ import os
 import json
 from bs4 import BeautifulSoup
 import requests
+import time
+from requests.exceptions import ConnectionError, ChunkedEncodingError, HTTPError
 
 # Global variables to keep track of the counter and limit
 counter = 0
@@ -13,11 +15,12 @@ def process_links(legifrance_links):
     processed_links = []
     for link in legifrance_links:
         page_soup = html_request(link)
-        article_name = extract_content_legifrance(page_soup)
-        processed_links.append({
-            "article_name": article_name,
-            "article_link": link
-        })
+        if page_soup:
+            article_name = extract_content_legifrance(page_soup)
+            processed_links.append({
+                "article_name": article_name,
+                "article_link": link
+            })
     return processed_links
 
 # Function to extract content from legifrance pages
@@ -47,12 +50,31 @@ def extract_content_legifrance(page_soup):
             content_text = ""
     return article_name
 
-# Function to make HTML requests
-def html_request(link):
-    response = requests.get(link)
-    # Parse the HTML content with explicit UTF-8 encoding
-    soup = BeautifulSoup(response.content, 'html.parser', from_encoding='utf-8')
-    return soup
+# Function to make HTML requests with retries
+def html_request(link, retries=5, backoff_factor=0.3):
+    for i in range(retries):
+        try:
+            response = requests.get(link)
+            response.raise_for_status()  # Raise an HTTPError for bad responses (4xx and 5xx)
+            # Parse the HTML content with explicit UTF-8 encoding
+            soup = BeautifulSoup(response.content, 'html.parser', from_encoding='utf-8')
+            return soup
+        except (ConnectionError, ChunkedEncodingError, requests.exceptions.RequestException) as e:
+            print(f"Attempt {i + 1} failed with error: {e}")
+            if i < retries - 1:
+                sleep_time = backoff_factor * (2 ** i)
+                print(f"Retrying in {sleep_time:.1f} seconds...")
+                time.sleep(sleep_time)
+            else:
+                print(f"Failed to fetch {link} after {retries} attempts.")
+                return None
+        except HTTPError as http_err:
+            if response.status_code == 404:
+                print(f"404 Error for {link}: {http_err}")
+                return None  # Skip 404 errors
+            else:
+                print(f"HTTP error occurred for {link}: {http_err}")
+                return None
 
 # Function to scrape content from each link
 def scrape_link_content(article_id, soup, link):
@@ -169,13 +191,19 @@ def run():
     for link in links:
         link = link.strip()
         html = html_request(link)
-        article_id_str, article_data = scrape_link_content(article_id, html, link)
-        article_data = remove_newlines(article_data)
-        
-        save_to_json({article_id_str: article_data})  # Save scraped content
-        
-        article_id += 1  # Increment article ID 
-        counter += 1
+        if html:  # Check if HTML request was successful
+            try:
+                article_id_str, article_data = scrape_link_content(article_id, html, link)
+                article_data = remove_newlines(article_data)
+                
+                save_to_json({article_id_str: article_data})  # Save scraped content
+                
+                article_id += 1  # Increment article ID 
+                counter += 1
+            except Exception as e:
+                print(f"Error processing {link}: {e}")
+        else:
+            print(f"Skipping {link} due to failed HTML request.")
 
     print("Process completed")
 

@@ -17635,3 +17635,129 @@ Livre des procédures fiscales (LPF), L. 176 du LPF et
 L. 177 du LPF.
 linked_article https://bofip.impots.gouv.fr/bofip/8004-PGP.html/identifiant%3DACTU-2013-00099
 
+id_article: 1
+titre: 03/07/2024 : IR - IS - CF - CTX - Extension du champ d'application du dispositif prévu à l'article 155 A du CGI (loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, art. 10)
+division Division/Serie Not Found
+text: L'article 155 A du code général des impôts permet à l'administration fiscale d'imposer, sous conditions, en France les rémunérations de services rendus par un prestataire établi en France, même lorsque ces rémunérations sont versées à un tiers établi à l'étranger.
+linked_article https://bofip.impots.gouv.fr/bofip/14369-PGP.html/ACTU-2024-00172
+
+id_article: 2
+titre: 03/07/2024 : BIC - IF - Suppression de l'exonération d'impôt sur les bénéfices en faveur des jeunes entreprises innovantes - Création d'une nouvelle catégorie dite « jeune entreprise de croissance » (loi n° 2024-1322 du 29 décembre 2023 de finances pour 2024, art. 44 et 69)
+division Division/Serie Not Found
+text: 1/ L'article 69 de la loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024 modifie la date de fin de l’exonération d’impôt sur les bénéfices associée au dispositif des jeunes entreprises innovantes (JEI) prévue à l'article 44 sexies A du code général des impôts (CGI), en réservant cette exonération aux entreprises créées jusqu'au 31 décembre 2023 au lieu du 31 décembre 2025.
+linked_article https://bofip.impots.gouv.fr/bofip/14329-PGP.html/ACTU-2024-00156
+
+id_article: 3
+titre: 03/07/2024 : BIC - IS - Aménagements des régimes d'aide fiscale à l'investissement productif outre-mer (loi n° 2018-1317 du 28 décembre 2018 de finances pour 2019, art. 30, 31, 131, 138, 153 et 154 ; loi n° 2019-1479 du 28 décembre 2019 de finances pour 2020, art. 159 ; loi n° 2020-1721 du 29 décembre 2020 de finances pour 2021, art. 108 et 109 ; loi n° 2021-1900 du 30 décembre 2021 de finances pour 2022, art. 72 ; loi n° 2022-1726 du 30 décembre 2022 de finances pour 2023, art. 13 et 14 ; loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, art. 71 et 75) - Rescrit
+division Division/Serie Not Found
+text: 1/ La présente publication a pour objet de commenter les aménagements successifs apportés aux dispositifs d’aide fiscale à l’investissement productif en outre-mer mentionnés à l’article 199 undecies B du code général des impôts (CGI), à l’article 217 undecies du CGI, à l’article 217 duodecies du CGI, à l’article 244 quater W du CGI et à l'article 244 quater Y du CGI.
+linked_article https://bofip.impots.gouv.fr/bofip/13017-PGP.html/ACTU-2021-00148
+
+id_article: 4
+titre: 03/07/2024 : BIC - Création du crédit d'impôt au titre des investissements dans l'industrie verte (C3IV) (loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, art. 35)
+division BIC - RICI
+text: L'article 35 de la loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024 crée un crédit d’impôt au titre des investissements dans l’industrie verte (C3IV), codifié à l'article 244 quater I du code général des impôts (CGI), en faveur des entreprises qui implantent ou développent en France des capacités de production dans les secteurs stratégiques pour la transition vers une économie décarbonée, à savoir la production de batteries, de panneaux solaires, d'éoliennes et de pompes à chaleur.
+linked_article https://bofip.impots.gouv.fr/bofip/14249-PGP.html/ACTU-2024-00112
+
+id_article: 5
+titre: 03/07/2024 : IF - Actualisation et élargissement du champ d'application de l'exonération de cotisation foncière des entreprises (CFE) en faveur des artistes-auteurs prévue par l'article 1460 du code général des impôts (loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, art. 148)
+division IF - CFE
+text: 1/ L'article 148 de la loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024 actualise et élargit le champ d'application de l'exonération de plein droit permanente de cotisation foncière des entreprises (CFE) en faveur des artistes-auteurs prévue à l'article 1460 du code général des impôts (CGI).
+linked_article https://bofip.impots.gouv.fr/bofip/14127-PGP.html/ACTU-2024-00019
+
+id_article: 6
+titre: 03/07/2024 : IF - Taxe d'enlèvement des ordures ménagères (TEOM) - Création d'un dispositif de zonage de la part incitative de la TEOM - Suppression du délai d'harmonisation de sept ans en cas de fusion d'établissements publics de coopération intercommunale (loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, art. 150)
+division IF - AUT
+text: L’article 150 de la loi n° 2023-1322 du 29 décembre 2023 finances pour 2024 permet aux établissements publics de coopération intercommunale (EPCI) de ne mettre en œuvre la part incitative de la taxe d'enlèvement des ordures ménagères (TEOM) que sur le territoire de leurs communes membres dont la proportion de logements situés dans des immeubles collectifs est supérieure à 20 % du nombre total de logements dans chacune de ces communes (code général des impôts [CGI], art. 1522 bis, I-B).
+linked_article https://bofip.impots.gouv.fr/bofip/14299-PGP.html/ACTU-2024-00134
+
+id_article: 7
+titre: 03/07/2024 : ENR - Aménagement de diverses dispositions relatives aux droits de mutation à titre onéreux (loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, art. 21 et loi n° 2019-1479 du 28 décembre 2019 de finances pour 2020, art. 29)
+division ENR - DG ; ENR - DMTOI ; ENR - DMTOM ; ENR - JOMI
+text: 1/ L'article 21 de la loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, poursuivant un objectif de clarification et de correction des dispositions applicables en matière de droits de mutation à titre onéreux, abroge :
+linked_article https://bofip.impots.gouv.fr/bofip/14326-PGP.html/ACTU-2024-00153
+
+id_article: 8
+titre: 02/07/2024 : IR - Prorogation jusqu'au 31 décembre 2026 du plafond dérogatoire de 1 000 € applicable aux dons retenus pour la réduction d'impôt de 75 % accordée au titre des dons versés aux organismes qui apportent une aide gratuite aux personnes en difficulté (loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, art. 15)
+division IR - RICI
+text: En application du 1 ter de l'article 200 du code général des impôts, le taux de la réduction d'impôt accordée au titre des dons et versements effectués au profit d'organismes sans but lucratif qui procèdent à la fourniture gratuite de repas à des personnes en difficulté, qui contribuent à favoriser leur logement ou qui procèdent, à titre principal, à la fourniture gratuite de soins à ces personnes est porté de 66 % à 75 %, dans la limite d'un plafond qui est relevé chaque année dans la même proportion que la limite supérieure de la première tranche du barème de l’impôt sur le revenu de l’année précédant celle des versements.
+linked_article https://bofip.impots.gouv.fr/bofip/14232-PGP.html/ACTU-2024-00099
+
+id_article: 9
+titre: 02/07/2024 : IR - Bornage de la réduction d'impôt accordée au titre des investissements dans une résidence hôtelière à vocation sociale (loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, art. 110, I-F)
+division IR - RICI ; ANNX
+text: L’article 199 decies I du code général des impôts (CGI) prévoit une réduction d’impôt pour les contribuables domiciliés en France, qui acquièrent, entre le 1er janvier 2007 et le 31 décembre 2010, un logement faisant partie d’une résidence hôtelière à vocation sociale et qui le destinent à une location dont le produit est imposé dans la catégorie des revenus fonciers.
+linked_article https://bofip.impots.gouv.fr/bofip/14355-PGP.html/ACTU-2024-00168
+
+id_article: 10
+titre: 27/06/2024 : IR - Sécurisation de l'application de la réduction d'impôt accordée au titre des dons aux organismes d'intérêt général qui concourent à l'égalité entre les femmes et les hommes (loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, art. 16)
+division IR - RICI
+text: L'article 16 de la loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024 confirme que les dons effectués aux organismes d'intérêt général qui concourent à l'égalité entre les femmes et les hommes ouvrent droit à la réduction d'impôt prévue à l'article 200 du code général des impôts (CGI).
+linked_article https://bofip.impots.gouv.fr/bofip/14295-PGP.html/ACTU-2024-00130
+
+id_article: 11
+titre: 27/06/2024 : IF - Actualisation des seuils de revenu fiscal de référence prévus par l'article 1417 du code général des impôts
+division BAREME
+text: 1/ En application du III de l'article 1417 du code général des impôts (CGI), les seuils de revenu fiscal de référence (RFR) prévus à ce même article et applicables aux régimes de faveur sous conditions de ressources en matière de taxe foncière sur les propriétés bâties (TFPB) et, jusqu'à l'année d'imposition 2022, de taxe d'habitation sur les résidences principales (THRP), sont revalorisés chaque année comme la première tranche du barème de l'impôt sur le revenu.
+linked_article https://bofip.impots.gouv.fr/bofip/14236-PGP.html/ACTU-2024-00101
+
+id_article: 12
+titre: 27/06/2024 : ENR - Exonération de droits de mutation par décès en faveur des transmissions résultant de la restitution aux ayants droit de biens culturels ayant fait l'objet d'une spoliation dans le contexte des persécutions antisémites perpétrées entre le 30 janvier 1933 et le 8 mai 1945 (loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, art. 25)
+division ENR - DMTG
+text: L'article 25 de la loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024 instaure une exonération, codifiée à l'article 796-0 quinquies du code général des impôts, de droits de mutation par décès en faveur des transmissions résultant de la restitution aux ayants droit de biens culturels ayant fait l'objet d'une spoliation dans le contexte des persécutions antisémites perpétrées entre le 30 janvier 1933 et le 8 mai 1945.
+linked_article https://bofip.impots.gouv.fr/bofip/14228-PGP.html/ACTU-2024-00096
+
+id_article: 13
+titre: 26/06/2024 : BIC - Modification du dispositif de provisions pour égalisation des entreprises d'assurance et de réassurance (loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, art. 4 et décret n° 2024-523 du 7 juin 2024 relatif aux règles de comptabilisation de la provision pour égalisation et au régime financier du Fonds de garantie des assurances de dommages obligatoires)
+division BIC - PROV
+text: 1/ L'article 4 de la loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024 a élargi la liste des opérations ouvrant droit à la constitution d'une provision pour égalisation, prévue à l'article 39 quinquies G du code général des impôts (CGI), en y ajoutant celles qui garantissent les risques dus aux atteintes aux systèmes d'information et de communication.
+linked_article https://bofip.impots.gouv.fr/bofip/14354-PGP.html/ACTU-2024-00167
+
+id_article: 14
+titre: 26/06/2024 : IS - Régime fiscal des produits de participation perçus par les sociétés membres d'un groupe fiscal et par certaines sociétés non membres d'un groupe fiscal (loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, art. 52) - Jurisprudences (CE, décision du 5 juillet 2022, n° 463021 ; CE, décision du 7 avril 2023, n° 462709)
+division IS - BASE ; IS - GPE
+text: 1/ L'article 52 de la loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024 a aménagé le régime fiscal des sociétés mères et filiales prévu à l'article 145 du code général des impôts (CGI) et à l'article 216 du CGI, ainsi que le régime fiscal des groupes de sociétés prévu à l'article 223 A et suivants du CGI, afin de mettre la législation française en conformité avec le droit de l'Union européenne (UE) :
+linked_article https://bofip.impots.gouv.fr/bofip/14207-PGP.html/ACTU-2024-00082
+
+id_article: 15
+titre: 26/06/2024 : IS - Régime fiscal des groupes de sociétés - Aménagement des modalités spécifiques d'appréciation de la détention du capital au sein de ces groupes en présence de certains dispositifs d'actionnariat salarié (loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, art. 62)
+division IS - GPE
+text: L'article 62 de la loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024 a aménagé le régime des groupes fiscaux codifié à l'article 223 A et suivants du code général des impôts, afin de rationaliser l'application des modalités spécifiques d'appréciation de la détention du capital au sein de ces groupes en présence de certains dispositifs d'actionnariat salarié.
+linked_article https://bofip.impots.gouv.fr/bofip/14080-PGP.html/ACTU-2023-00139
+
+id_article: 16
+titre: 26/06/2024 : AIS - Taxe sur la mise en relation par voie électronique en vue de fournir certaines prestations de transport (loi n° 2021-1900 du 30 décembre 2021 de finances pour 2022, art. 116)
+division AIS - CCN
+text: L’article 116 de la loi n° 2021-1900 du 30 décembre 2021 de finances pour 2022 a instauré une taxe sur la mise en relation par voie électronique en vue de fournir certaines prestations de transport, dont le produit est affecté à l'Autorité des relations sociales des plateformes d'emploi (ARPE).
+linked_article https://bofip.impots.gouv.fr/bofip/13783-PGP.html/ACTU-2022-00158
+
+id_article: 17
+titre: 26/06/2024 : INT - Convention multilatérale pour la mise en œuvre des mesures relatives aux conventions fiscales pour prévenir l'érosion de la base d'imposition et le transfert de bénéfices - Réorganisation formelle des commentaires
+division INT - DG
+text: Les commentaires doctrinaux relatifs à la convention multilatérale pour la mise en œuvre des mesures relatives aux conventions fiscales pour prévenir l’érosion de la base d’imposition et le transfert de bénéfices (PDF - 275 Ko) (« CML »), signée par la France à Paris le 7 juin 2017 et dont la ratification a été autorisée par la loi n° 2018-604 du 12 juillet 2018 autorisant la ratification de la convention multilatérale pour la mise en œuvre des mesures relatives aux conventions fiscales pour prévenir l'érosion de la base d'imposition et le transfert de bénéfices sont mis à jour et réorganisés.
+linked_article https://bofip.impots.gouv.fr/bofip/14012-PGP.html/ACTU-2023-00107
+
+id_article: 18
+titre: 20/06/2024 : IR - Suppression du crédit d'impôt accordé aux étudiants en vue du financement de leurs études supérieures (loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, art. 110, I-M-4°)
+division IR - BASE ; IR - RICI
+text: Le 4° du M du I de l'article 110 de la loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024 a abrogé l'article 200 terdecies du code général des impôts qui prévoyait un crédit d'impôt accordé aux étudiants en vue du financement de leurs études supérieures.
+linked_article https://bofip.impots.gouv.fr/bofip/14148-PGP.html/ACTU-2024-00040
+
+id_article: 19
+titre: 20/06/2024 : IR - Crédit d'impôt au titre des dépenses en faveur de l'aide aux personnes - Prorogation jusqu'au 31 décembre 2026 du volet en faveur des dépenses pour la réalisation de diagnostics préalables aux travaux et travaux prescrits par des plans de prévention des risques technologiques (loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, art. 17) et recentrage du champ d'application du crédit d'impôt sur les dépenses permettant l'adaptation des logements à la perte d'autonomie ou au handicap (loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, art. 71, III-2° et IV)
+division Division/Serie Not Found
+text: La loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024 a modifié le crédit d'impôt au titre des dépenses en faveur de l'aide aux personnes codifié à l'article 200 quater A du code général des impôts (CGI).
+linked_article https://bofip.impots.gouv.fr/bofip/14341-PGP.html/ACTU-2024-00161
+
+id_article: 20
+titre: 19/06/2024 : RSA - Exonération des salariés détachés par l'employeur - Actualisation de la rémunération de référence des marins pêcheurs pour l'imposition des revenus de 2023 et de 2024
+division RSA - GEO
+text: Les marins pêcheurs exerçant leur activité en dehors des eaux territoriales françaises peuvent, sous certaines conditions, bénéficier de l'exonération partielle d'impôt sur le revenu prévue au II de l'article 81 A du code général des impôts.
+linked_article https://bofip.impots.gouv.fr/bofip/14172-PGP.html/ACTU-2024-00062
+
+id_article: 21
+titre: 19/06/2024 : BA - Renforcement du crédit d’impôt au titre des dépenses de remplacement pour congé de certains exploitants agricoles  (loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, art. 50)
+division BA - RICI
+text: 1/ L’article 50 de la loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024 apporte plusieurs aménagements visant à renforcer le crédit d’impôt au titre des dépenses de remplacement pour congé de certains exploitants agricoles, prévu à l’article 200 undecies du code général des impôts :
+linked_article https://bofip.impots.gouv.fr/bofip/14297-PGP.html/ACTU-2024-00132
+
