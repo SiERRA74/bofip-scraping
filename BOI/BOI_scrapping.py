@@ -13,11 +13,17 @@ def html_request(link):
 def scrape_text_from_link(link):
     soup = html_request(link)
     if soup:
+        # Extract the title (h1)
+        title_element = soup.find('h1')
+        title = title_element.get_text(strip=True) if title_element else "Title Not Found"
+        
+        # Extract the text from paragraphs with the class 'paragraphe-western'
         paragraphs = soup.find_all('p', class_='paragraphe-western')
         text = ' '.join(p.get_text(strip=True) for p in paragraphs)
-        return text
+        
+        return title, text
     else:
-        return None
+        return None, None
 
 def scrape_and_write_data(links_file, output_file):
     data = []
@@ -26,10 +32,11 @@ def scrape_and_write_data(links_file, output_file):
 
     for idx, link in enumerate(links, start=1):
         link = link.strip()
-        text = scrape_text_from_link(link)
+        title, text = scrape_text_from_link(link)
         if text:
             data.append({
                 "link": link,
+                "title": title,  # Add title to the data
                 "text": text
             })
             print(f"Scraped data from {link} and added to the list")

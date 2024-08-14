@@ -5,7 +5,7 @@ import os
 def scrap_news():
     all_links = []
     print("processing links in pages")
-    for page in range(122):
+    for page in range(123):
         url = f"https://bofip.impots.gouv.fr/actualites/toutes-les-actualites/all?page={page}"
         response = requests.get(url)
         
