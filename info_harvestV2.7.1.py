@@ -109,7 +109,7 @@ def scrape_link_content(article_id, soup, link):
                 if a['href'].startswith("https://www.legifrance.gouv.fr/"):
                     legifrance.append(a['href'])
     
-    # Updated section to find BOI files in "Documents liés :"
+   # Updated section to find BOI files in "Documents liés :"
     boi_section = soup.find('div', id='document-lies')
 
     if boi_section:
@@ -119,6 +119,7 @@ def scrape_link_content(article_id, soup, link):
             if link_element:
                 boi_code = link_element.text.strip()
                 boi_href = link_element['href']
+                # Get description by removing the code and link from the text
                 boi_files.append({
                     'code': boi_code, 
                     'link': boi_href
