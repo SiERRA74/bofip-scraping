@@ -60,3 +60,5 @@ all_french_links = list(set(all_french_links))
 save_eurlex_links(all_french_links)
 
 print(f"Total links saved: {len(all_french_links)}")
+
+
