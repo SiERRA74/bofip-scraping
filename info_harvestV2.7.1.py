@@ -1,10 +1,7 @@
-import re
-import os
-import json
+import re, os, json, requests, time
 from bs4 import BeautifulSoup
-import requests
-import time
 from requests.exceptions import ConnectionError, ChunkedEncodingError, HTTPError
+import boi_cases as boi
 
 # Global variables to keep track of the counter and limit
 counter = 0
@@ -72,14 +69,16 @@ def html_request(link, retries=5, backoff_factor=0.3):
                 print(f"HTTP error occurred for {link}: {http_err}")
                 return None
 
+
 # Function to scrape content from each link
 def scrape_link_content(article_id, soup, link):
     article_id = f"article-{article_id}"
-    # Extract the desired information
+    
+    # Extract the title
     title_element = soup.find('h1', class_='titre-news-du-document-western')
     title = title_element.text.strip() if title_element else "Title Not Found"
     
-    # Find the division/serie
+    # Extract the division/serie
     division_serie_element = soup.find('p', string=re.compile(r"Série / Division", re.IGNORECASE))
     if division_serie_element:
         next_p_element = division_serie_element.find_next_sibling('p')
@@ -87,12 +86,12 @@ def scrape_link_content(article_id, soup, link):
     else:
         division_serie = "Division/Serie Not Found"
     
-    # Find the text and collect links
+    # Extract the main text and collect links
     text_elements = []
     legifrance = []
     boi_files = []
 
-    # Iterate through all <p> tags and <blockquote> tags
+    # Iterate through all <p> and <blockquote> tags
     for container in soup.find_all(['p', 'blockquote']):
         if container.name == 'blockquote':
             paragraphs = container.find_all('p')
@@ -104,31 +103,38 @@ def scrape_link_content(article_id, soup, link):
                 break
             text_elements.append(p.get_text().strip())
             
-            # Find all links in the paragraph
+            # Find all Legifrance links in the paragraph
             for a in p.find_all('a', href=True):
                 if a['href'].startswith("https://www.legifrance.gouv.fr/"):
                     legifrance.append(a['href'])
     
-   # Updated section to find BOI files in "Documents liés :"
-    boi_section = soup.find('div', id='document-lies')
+    # Process BOI files for four cases
 
-    if boi_section:
-        boi_items = boi_section.find_all('p')
-        for item in boi_items:
-            link_element = item.find('a', href=True)
-            if link_element:
-                boi_code = link_element.text.strip()
-                boi_href = link_element['href']
-                # Get description by removing the code and link from the text
-                boi_files.append({
-                    'code': boi_code, 
-                    'link': boi_href
-                })
+    # Case 1: <div class="document-lies"> structure
+    boi_section_div = soup.find('div', id='document-lies')
+    if boi_section_div:
+        paragraphs = boi_section_div.find_all('p', class_='paragraphe-rescrit-actu-western')
+        
+        if paragraphs:
+            for p in paragraphs:
+                link_element = p.find('a', href=True)
+                if link_element:
+                    boi_code = link_element.text.strip()
+                    boi_href = link_element['href']
+                    description = p.get_text().replace(boi_code, '').strip(': ').strip()
+                    boi_files.append({
+                        'code': boi_code, 
+                        'link': boi_href,
+                        'description': description
+                    })
+        else:
+            # Add a note indicating the BOI section was empty
+            boi.boi_case2()
+
+
+
 
     text = ' '.join(text_elements)
-    
-    # Extract the link of the article itself
-    article_link = link
     
     # Process Legifrance links
     processed_legifrance_links = process_links(legifrance)
@@ -137,10 +143,12 @@ def scrape_link_content(article_id, soup, link):
         'title': title, 
         'division_serie': division_serie, 
         'text': text, 
-        'link': article_link, 
+        'link': link, 
         'legifrance': processed_legifrance_links,
         'boi_files': boi_files
     }
+
+
 
 def remove_newlines(data):
     if isinstance(data, str):
