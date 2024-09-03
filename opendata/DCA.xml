@@ -1,0 +1,30 @@
+﻿<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="validation-document.xsd">
+    <Donnees_Techniques>
+        <Identification>ORCA_23MA01264_20230523.xml</Identification>
+        <Date_Mise_Jour>2023-06-28</Date_Mise_Jour>
+    </Donnees_Techniques>
+    <Dossier>
+        <Code_Juridiction>CAA13</Code_Juridiction>
+        <Nom_Juridiction>Cour administrative d'appel de Marseille</Nom_Juridiction>
+        <Numero_Dossier>23MA01264</Numero_Dossier>
+        <Date_Lecture>2023-05-23</Date_Lecture>
+        <Type_Decision>Ordonnance</Type_Decision>
+        <Type_Recours>excès de pouvoir</Type_Recours>
+        <Code_Publication/>
+        <Solution>TA Marseille</Solution>
+    </Dossier>
+    <Decision>
+        <Texte_Integral>
+        <p>Vu la procédure suivante :</p>
+        <p>Par une requête, enregistrée le 22 mai 2023, M. A B demande à la Cour d'annuler la décision prononçant son exclusion définitive de l'institut de formation en soins infirmiers (IFSI) du groupement de coopération sanitaire du Pays d'Aix (GCSPA).</p>
+        <p>Vu les autres pièces du dossier.</p>
+        <p>Vu le code de justice administrative et notamment ses articles L. 211-1, R. 312-12 et R. 351-3.</p>
+        <p>O R D O N N E :</p>
+        <p>Article 1er : Le dossier de la requête de M. B est transmis au tribunal administratif de Marseille.</p>
+        <p>Article 2 : La présente ordonnance sera notifiée à M. A B et à la présidente du tribunal administratif de Marseille.</p>
+        <p>Fait à Marseille, le 23 mai 2023</p>
+        <p>N° </p>
+        <p>RP</p>
+        </Texte_Integral>
+    </Decision>
+</Document>
