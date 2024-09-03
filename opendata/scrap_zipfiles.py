@@ -1,18 +1,30 @@
 import xml.etree.ElementTree as ET
 import os
 
-tree = ET.parse('opendata/country.xml')
+tree = ET.parse('opendata/DCA.xml')
 root = tree.getroot()
 content = root.attrib
+text_all = ""
 
-for country in root.findall('country'):
-    # using root.findall() to avoid removal during traversal
-    rank = int(country.find('rank').text)
-    if rank > 50:
-        root.remove(country)
+for para in root.iter('p'):
+    text_all += (para.text+"\n")
+
+print("\n==>>>L'INTEGRALITE du texte \n")
+print(text_all)
 
 
-tree.write('opendata/country.xml')
+def verify_fisc(texte):
+
+    filter = ["code general des impôts","livre des procédures fiscales"]
+
+    for i in range(len(filter)):
+        if filter[i] in texte:
+            return print("\033[92m Ce fichier CONCERNE la fiscalité \033[0m")
+    print("\033[91m Ce fichier ne conerne PAS la fiscalité \033[0m")
+
+
+verify_fisc(text_all)
+
 
 
 """file_path = 'opendata/DCA.xml'
