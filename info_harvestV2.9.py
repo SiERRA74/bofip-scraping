@@ -21,27 +21,55 @@ def process_links(legifrance_links):
             })
     return processed_links
 
-# Function to extract content from legifrance pages
 def extract_content_legifrance(page_soup):
-    # Find the <article> element
+    # Initialize the result with defaults
+    article_name = "Title Not Found"
+    content_text = ""
+
+    # Attempt to find the <article> element first
     article_element = page_soup.find('article')
+    
     if article_element:
-        # Extract the title from the <h2> element within the <article>
-        title_element = article_element.find('h2')
+        # Check for the <h2> title within the <article>
+        title_element = article_element.find(['h2','h4'])
         article_name = title_element.text.strip() if title_element else "Title Not Found"
-        
-        # Extract all <p> elements within the <article>
+
+        # Check for the <p> with class "name-article" if <h2> is not found
+        if article_name == "Title Not Found":
+            name_article_element = article_element.find('p', class_='name-article')
+            article_name = name_article_element.text.strip() if name_article_element else "Title Not Found"
+
+        # Extract paragraphs within the article
         paragraphs = article_element.find_all('p')
-        # Join the text content of each paragraph into a single string
         content_text = ' '.join(p.text.strip() for p in paragraphs)
+
     else:
-        article_name = "Article Element Not Found"
-        content_text = ""
+        # If no <article> found, check for <div class="content-page">
+        content_div = page_soup.find('div', class_='content-page')
+        if content_div:
+            # Find the title within an <h2> element inside <div class="content-page">
+            title_element = content_div.find('h2', class_='title')
+            article_name = title_element.text.strip() if title_element else "Title Not Found"
+
+            # Extract the text from all relevant <div> elements within this block
+            content_divs = content_div.find_all('div')
+            content_text = ' '.join(div.get_text(strip=True) for div in content_divs)
+        else:
+            # Fallback if neither <article> nor <div class="content-page"> are found
+            title_element = page_soup.find(['h1', 'h2', 'h3'])
+            article_name = title_element.text.strip() if title_element else "Title Not Found"
+
+            # Extract all <p> elements from the entire page
+            paragraphs = page_soup.find_all('p')
+            content_text = ' '.join(p.text.strip() for p in paragraphs)
 
     return {
         "article_name": article_name,
         "content_text": content_text
     }
+
+
+
 
 # Function to make HTML requests with retries
 def html_request(link, retries=5, backoff_factor=0.3):
