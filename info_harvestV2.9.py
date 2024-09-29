@@ -8,12 +8,14 @@ counter = 0
 limit = 1000  # Update the limit to 1000
 
 # Function to process each legifrance link
+
 def process_links(legifrance_links):
     processed_links = []
     for link in legifrance_links:
         page_soup = html_request(link)
         if page_soup:
-            legifrance_content = extract_content_legifrance(page_soup)
+            # Pass both the soup and the link (url) to the extract_content_legifrance function
+            legifrance_content = extract_content_legifrance(page_soup, link)
             processed_links.append({
                 "article_name": legifrance_content["article_name"],
                 "article_link": link,
@@ -21,53 +23,85 @@ def process_links(legifrance_links):
             })
     return processed_links
 
-def extract_content_legifrance(page_soup):
-    # Initialize the result with defaults
+
+def extract_content_legifrance(page_soup, url):
     article_name = "Title Not Found"
     content_text = ""
 
-    # Attempt to find the <article> element first
-    article_element = page_soup.find('article')
+    # Case 1: CETA Links
+    if "ceta" in url:
+        content_div = page_soup.find('div', class_='content')
+        
+        if content_div:
+            # Extract title from <h1> with class "main-title" outside of the content div
+            title_element = content_div.find_previous_sibling('div').find('h1', class_='main-title')
+            article_name = title_element.text.strip() if title_element else "Title Not Found"
+            
+            # Extract content text from <div> tags with class "content-page"
+            content_pages = content_div.find_all('div', class_='content-page')
+            
+            if content_pages:
+                # Extract content text from <div> tags inside "content-page", separate using space for <br> elements
+                content_text = ' '.join(div.get_text(separator=' ').strip() for div in content_pages)
+            else:
+                content_text = "Content Not Found in 'content-page'"
+        else:
+            article_name = "Main Content Div Not Found"
+            content_text = "Main Content Div Not Found"
+
+
+    # Case 2: Standard article links with <h2> or <p> for title
+    elif page_soup.find('article'):
+        article_element = page_soup.find('article')
+
+        # Try finding the title in <h2> first
+        title_element = article_element.find('h2', class_='name-article')
+        if not title_element:
+            title_element = article_element.find('h3', class_='name-article abrogated')
+            if not title_element:
+                # If <h2> is not found, check for <p> with the class name-article
+                title_element = article_element.find('p', class_=['name-article', 'name-article abrogated'])
+        
+        article_name = title_element.get_text(strip=True) if title_element else "Title Not Found"
+
+        # Extract content from <p> tags inside the <div class="content">
+        content_div = article_element.find('div', class_='content')
+        if content_div:
+            paragraphs = content_div.find_all('p')
+            content_text = ' '.join(p.get_text(strip=True) for p in paragraphs)
     
-    if article_element:
-        # Check for the <h2> title within the <article>
-        title_element = article_element.find(['h2','h4'])
-        article_name = title_element.text.strip() if title_element else "Title Not Found"
 
-        # Check for the <p> with class "name-article" if <h2> is not found
-        if article_name == "Title Not Found":
-            name_article_element = article_element.find('p', class_='name-article')
-            article_name = name_article_element.text.strip() if name_article_element else "Title Not Found"
-
-        # Extract paragraphs within the article
-        paragraphs = article_element.find_all('p')
-        content_text = ' '.join(p.text.strip() for p in paragraphs)
-
+    # Case 3: Fallback, no <article> but may have content elsewhere
     else:
-        # If no <article> found, check for <div class="content-page">
+        # Try to find content directly in <div class="content-page">
         content_div = page_soup.find('div', class_='content-page')
         if content_div:
-            # Find the title within an <h2> element inside <div class="content-page">
-            title_element = content_div.find('h2', class_='title')
-            article_name = title_element.text.strip() if title_element else "Title Not Found"
-
-            # Extract the text from all relevant <div> elements within this block
+            # Extract title from <h2> element
+            title_element = content_div.find('h2')
+            article_name = title_element.get_text(strip=True) if title_element else "Title Not Found"
+            
+            # Extract the content using <div> and <br>
             content_divs = content_div.find_all('div')
-            content_text = ' '.join(div.get_text(strip=True) for div in content_divs)
-        else:
-            # Fallback if neither <article> nor <div class="content-page"> are found
-            title_element = page_soup.find(['h1', 'h2', 'h3'])
-            article_name = title_element.text.strip() if title_element else "Title Not Found"
+            if content_divs:
+                content_text = ' '.join(div.get_text(separator=' ').strip() for div in content_divs)
 
-            # Extract all <p> elements from the entire page
-            paragraphs = page_soup.find_all('p')
-            content_text = ' '.join(p.text.strip() for p in paragraphs)
+    # Case 4: Links with <h4> for the title and <p>/<blockquote> for content
+    if not article_name or article_name == "Title Not Found":
+        article_element = page_soup.find('article')
+        if article_element:
+            title_element = article_element.find('h4', class_='name-article')
+            article_name = title_element.get_text(strip=True) if title_element else "Title Not Found"
+            
+            # Extract content from <p> and <blockquote> tags inside the <div class="content">
+            content_div = article_element.find('div', class_='content')
+            if content_div:
+                paragraphs = content_div.find_all(['p', 'blockquote'])
+                content_text = ' '.join(p.get_text(strip=True) for p in paragraphs)
 
     return {
         "article_name": article_name,
         "content_text": content_text
     }
-
 
 
 

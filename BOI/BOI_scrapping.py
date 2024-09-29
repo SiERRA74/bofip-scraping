@@ -10,7 +10,7 @@ def html_request(link):
         print(f"Failed to fetch {link}. Status code: {response.status_code}")
         return None
 
-def scrape_text_from_link(link):
+def scrape_text_and_legifrance_links(link):
     soup = html_request(link)
     if soup:
         # Extract the title (h1)
@@ -19,27 +19,38 @@ def scrape_text_from_link(link):
         
         # Extract the text from paragraphs with the class 'paragraphe-western'
         paragraphs = soup.find_all('p', class_='paragraphe-western')
-        text = ' '.join(p.get_text(strip=True) for p in paragraphs)
+        text = '  '.join(p.get_text(strip=True).replace('\n', '  ') for p in paragraphs)  # Replace \n with double spaces
         
-        return title, text
+        # Extract only links containing 'https://www.legifrance.gouv.fr/codes/' and exclude 'circulaires'
+        legifrance_links = []
+        for a_tag in soup.find_all('a', href=True):
+            href = a_tag['href']
+            if 'https://www.legifrance.gouv.fr/codes/' in href:  # Only take specific 'codes' links
+                legifrance_links.append(href)
+
+        return title, text, legifrance_links
     else:
-        return None, None
+        return None, None, None
 
 def scrape_and_write_data(links_file, output_file):
-    data = []
+    data = {"documents BOI": {}}  # Initializing the main dictionary as an empty dictionary
     with open(links_file, 'r', encoding='utf-8') as file:
         links = file.readlines()
 
     for idx, link in enumerate(links, start=1):
         link = link.strip()
-        title, text = scrape_text_from_link(link)
+        title, text, legifrance_links = scrape_text_and_legifrance_links(link)
+        
         if text:
-            data.append({
+            document_key = f"boifile-{idx}"  # Create a unique key for each document
+            document_data = {
                 "link": link,
                 "title": title,  # Add title to the data
-                "text": text
-            })
-            print(f"Scraped data from {link} and added to the list")
+                "text": text,
+                "legifrance": legifrance_links  # Add legifrance links to the data
+            }
+            data["documents BOI"][document_key] = document_data  # Add each document under its unique key
+            print(f"Scraped data from {link} and added to the dictionary as {document_key}")
         else:
             print(f"Failed to scrape data from {link}")
 
